@@ -20,6 +20,8 @@ public class HelloController {
     @FXML
     private Label message_lbl;
 
+    private User user = new User("admin", "1234");
+
     @FXML
     void onHelloButtonClick(ActionEvent event) {
         List<User> userlist = new ArrayList<>();
