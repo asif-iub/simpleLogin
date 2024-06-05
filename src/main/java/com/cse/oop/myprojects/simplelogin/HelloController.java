@@ -6,9 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class HelloController {
 
     @FXML
@@ -20,30 +17,31 @@ public class HelloController {
     @FXML
     private Label message_lbl;
 
-    private User user = new User("admin", "1234");
+    private final Authenticator auth = new Authenticator();
 
     @FXML
-    void onHelloButtonClick(ActionEvent event) {
-        List<User> userlist = new ArrayList<>();
-        userlist.add(new User("admin", "1234"));
-        userlist.add(new User("hr", "0987"));
-        userlist.add(new User("engineer", "qwerty"));
-        userlist.add(new User("customer", "asdf"));
-
-
+    void onLoginButtonClick(ActionEvent event) {
         String username = username_tf.getText();
         String password = password_tf.getText();
 
         User login_user = new User(username, password);
 
-        for (User user: userlist) {
-            if (login_user.equals(user)) {
-                message_lbl.setText("Log in successful!");
-                // switch to dashboard
-                return;
-            }
+        if (auth.checkLogIn(login_user)) {
+            message_lbl.setText("Log in successful!");
         }
-        message_lbl.setText("Invalid username or password!");
+        else {
+            message_lbl.setText("Invalid username or password!");
+        }
+    }
+    @FXML
+    void onRegisterButtonClick(ActionEvent event) {
+//        auth = new Authenticator();
+
+        String username = username_tf.getText();
+        String password = password_tf.getText();
+
+        User login_user = new User(username, password);
+        auth.addNewUser(login_user);
     }
 
 }
