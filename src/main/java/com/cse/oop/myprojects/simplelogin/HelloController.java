@@ -23,6 +23,10 @@ public class HelloController {
     void onLoginButtonClick(ActionEvent event) {
         String username = username_tf.getText();
         String password = password_tf.getText();
+        if (!validate(username, password)) {
+            message_lbl.setText("Username or password cannot be blank!");
+            return;
+        }
 
         User login_user = new User(username, password);
 
@@ -40,8 +44,25 @@ public class HelloController {
         String username = username_tf.getText();
         String password = password_tf.getText();
 
+        if (!validate(username, password)) {
+            message_lbl.setText("Username or password cannot be blank!");
+            return;
+        }
+
         User login_user = new User(username, password);
-        auth.addNewUser(login_user);
+        if (auth.addNewUser(login_user)) {
+            message_lbl.setText("User added successfully!");
+        }
+        else {
+            message_lbl.setText("Could not add user!");
+        }
     }
 
+    private boolean validate(String username, String password) {
+        if (username.isBlank() || password.isBlank()) {
+//            message_lbl.setText("Username or password cannot be blank!");
+            return false;
+        }
+        return true;
+    }
 }
