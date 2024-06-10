@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Authenticator {
     private static final List<User> userlist = new ArrayList<>();
+
     static {
         userlist.add(new User("admin", "1234"));
         userlist.add(new User("hr", "0987"));

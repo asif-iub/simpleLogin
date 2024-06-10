@@ -51,6 +51,11 @@ public class HelloController {
             return;
         }
 
+        if (!validatePassword(password)) {
+            message_lbl.setText("Password does not satisfy the criteria.");
+            return;
+        }
+
         User login_user = new User(username, password);
         if (auth.addNewUser(login_user)) {
             message_lbl.setText("User added successfully!");
@@ -58,6 +63,25 @@ public class HelloController {
         else {
             message_lbl.setText("Could not add user!");
         }
+    }
+
+    private boolean validatePassword(String password) {
+        if (password.length() < 6) return false;
+
+        boolean hasdigit = false;
+        boolean haslowercase = false;
+        boolean hasuppercase = false;
+        boolean hasspecialchar = false;
+
+        for (int i = 0; i < password.length(); i++){
+            char c = password.charAt(i);
+            if (Character.isDigit(c)) hasdigit = true;
+            else if (Character.isLowerCase(c)) haslowercase = true;
+            else if (Character.isUpperCase(c)) hasuppercase = true;
+            else hasspecialchar = true;
+        }
+
+        return hasdigit && haslowercase && hasuppercase && !hasspecialchar;
     }
 
     private boolean validate(String username, String password) {
