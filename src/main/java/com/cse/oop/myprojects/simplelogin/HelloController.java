@@ -17,10 +17,12 @@ public class HelloController {
     @FXML
     private Label message_lbl;
 
-    private final Authenticator auth = new Authenticator();
+//    private final Authenticator auth = new Authenticator();
 
     @FXML
     void onLoginButtonClick(ActionEvent event) {
+        Authenticator auth = new Authenticator();
+
         String username = username_tf.getText();
         String password = password_tf.getText();
         if (!validate(username, password)) {
@@ -39,7 +41,7 @@ public class HelloController {
     }
     @FXML
     void onRegisterButtonClick(ActionEvent event) {
-//        auth = new Authenticator();
+        Authenticator auth = new Authenticator();
 
         String username = username_tf.getText();
         String password = password_tf.getText();

@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Authenticator {
-    private final List<User> userlist;
-
-    public Authenticator(){
-        userlist = new ArrayList<>();
+    private static final List<User> userlist = new ArrayList<>();
+    static {
         userlist.add(new User("admin", "1234"));
         userlist.add(new User("hr", "0987"));
         userlist.add(new User("engineer", "qwerty"));
