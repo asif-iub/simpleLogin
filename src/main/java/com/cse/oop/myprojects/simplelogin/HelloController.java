@@ -3,6 +3,7 @@ package com.cse.oop.myprojects.simplelogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -40,8 +41,15 @@ public class HelloController {
 
         if (auth.checkLogIn(login_user)) {
             message_lbl.setText("Log in successful!");
+
+            // static FXMLLoader
+//            Parent root = FXMLLoader.load(getClass().getResource("dashboard_admin.fxml"));
+//            Scene scene2 = new Scene(root);
+
+            // non-static FXMLLoader
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dashboard_admin.fxml"));
             Scene scene2 = new Scene(fxmlLoader.load());
+            ((DashboardAdmin) fxmlLoader.getController()).setUser(login_user);
 
             // find the current stage (window)
             Button btn = (Button) event.getSource();

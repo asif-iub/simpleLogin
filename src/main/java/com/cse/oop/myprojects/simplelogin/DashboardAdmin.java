@@ -5,11 +5,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class DashboardAdmin {
+
+    @FXML
+    private Label user_lbl;
+
+    private User user;
 
     @FXML
     void onLogOutButtonClick(ActionEvent event) throws IOException {
@@ -24,6 +30,11 @@ public class DashboardAdmin {
 
         stage.setTitle("Admin Dashboard");
         stage.setScene(scene2);
+    }
+
+    public void setUser(User user) {
+        this.user  = user;
+        user_lbl.setText(user.getUsername());
     }
 
 }
