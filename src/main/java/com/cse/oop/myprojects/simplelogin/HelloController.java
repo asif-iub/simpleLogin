@@ -41,20 +41,13 @@ public class HelloController {
 
         if (auth.checkLogIn(login_user)) {
             message_lbl.setText("Log in successful!");
-
-            // static FXMLLoader
-//            Parent root = FXMLLoader.load(getClass().getResource("dashboard_admin.fxml"));
-//            Scene scene2 = new Scene(root);
-
             // non-static FXMLLoader
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dashboard_admin.fxml"));
             Scene scene2 = new Scene(fxmlLoader.load());
             ((DashboardAdmin) fxmlLoader.getController()).setUser(login_user);
 
             // find the current stage (window)
-            Button btn = (Button) event.getSource();
-            Scene scene1 = btn.getScene();
-            Stage stage = (Stage) scene1.getWindow();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
 
             stage.setTitle("Admin Dashboard");
             stage.setScene(scene2);
