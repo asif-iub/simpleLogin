@@ -7,8 +7,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.beans.PropertyChangeListenerProxy;
 import java.io.IOException;
 
 public class DashboardAdmin {
@@ -16,7 +20,25 @@ public class DashboardAdmin {
     @FXML
     private Label user_lbl;
 
+    @FXML
+    private TableView<User> user_tableView;
+
+    @FXML
+    private TableColumn<User, String> password_tc;
+
+    @FXML
+    private TableColumn<User, String> username_tc;
+
     private User user;
+
+    @FXML
+    void initialize() {
+        username_tc.setCellValueFactory(new PropertyValueFactory<>("username"));
+        password_tc.setCellValueFactory(new PropertyValueFactory<>("password"));
+
+        user_tableView.getItems().addAll(Authenticator.getUserList());
+    }
+
 
     @FXML
     void onLogOutButtonClick(ActionEvent event) throws IOException {

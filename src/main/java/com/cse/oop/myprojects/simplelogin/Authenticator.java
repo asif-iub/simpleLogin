@@ -13,7 +13,7 @@ public class Authenticator {
         userlist.add(new User("customer", "asdf"));
     }
 
-    public List<User> getUserList() {
+    public static List<User> getUserList() {
         return userlist;
     }
 
