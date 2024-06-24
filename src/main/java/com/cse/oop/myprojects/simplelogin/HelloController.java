@@ -56,6 +56,7 @@ public class HelloController {
             message_lbl.setText("Invalid username or password!");
         }
     }
+
     @FXML
     void onRegisterButtonClick(ActionEvent event) {
         Authenticator auth = new Authenticator();

@@ -32,9 +32,17 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="21.0" layoutY="124.0" />
-      <PasswordField layoutX="21.0" layoutY="162.0" />
-      <Button layoutX="21.0" layoutY="209.0" mnemonicParsing="false" text="Add User">
+      <TextField fx:id="username_tf" layoutX="21.0" layoutY="124.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="password_tf" layoutX="21.0" layoutY="162.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </PasswordField>
+      <Button layoutX="21.0" layoutY="209.0" mnemonicParsing="false" onAction="#onAddUserButtonClick" text="Add User">
          <font>
             <Font size="14.0" />
          </font>
@@ -42,13 +50,18 @@
       <Line endX="-49.0" endY="5.0" layoutX="255.0" layoutY="81.0" startX="-49.0" startY="280.0" stroke="#333333" strokeWidth="4.0" />
       <TableView fx:id="user_tableView" layoutX="226.0" layoutY="124.0" prefHeight="241.0" prefWidth="357.0">
         <columns>
-          <TableColumn fx:id="username_tc" prefWidth="125.0" style="font-size: 14;" text="Username" />
+          <TableColumn fx:id="username_tc" prefWidth="125.0" text="Username" />
           <TableColumn fx:id="password_tc" prefWidth="129.0" text="Password" />
         </columns>
       </TableView>
       <Label layoutX="226.0" layoutY="81.0" text="User List">
          <font>
             <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="message_lbl" layoutX="21.0" layoutY="245.0" prefHeight="117.0" prefWidth="173.0" text="Label">
+         <font>
+            <Font size="14.0" />
          </font>
       </Label>
    </children>
