@@ -31,9 +31,9 @@
       <font>
          <Font size="14.0" />
       </font></Label>
-   <Button mnemonicParsing="false" onAction="#onDemoAdminClick" text="Demo Admin User">
+   <Button mnemonicParsing="false" onAction="#onDemoAdminClick" text="Demo Admin User" textFill="RED">
       <font>
-         <Font size="14.0" />
+         <Font name="System Bold" size="14.0" />
       </font>
    </Button>
 </VBox>

@@ -17,8 +17,8 @@ public class Authenticator {
         return userlist;
     }
 
-    public boolean checkLogIn(User loginUser){
-        for (User user: userlist) {
+    public boolean checkLogIn(User loginUser) {
+        for (User user : userlist) {
             if (loginUser.equals(user)) {
                 return true;
             }
@@ -26,16 +26,16 @@ public class Authenticator {
         return false;
     }
 
-    public boolean addNewUser(User loginUser) {
-        for (User user: userlist) {
+    public void addNewUser(User loginUser) throws Exception {
+
+        for (User user : userlist) {
             if (loginUser.getUsername().equals(user.getUsername())) {
                 System.out.println("A user '" + loginUser.getUsername() + "' already exists!");
-                return false;
+                throw new Exception("Username is not unique");
             }
         }
 
         userlist.add(loginUser);
         System.out.println("New user added: " + loginUser.toString());
-        return true;
     }
 }

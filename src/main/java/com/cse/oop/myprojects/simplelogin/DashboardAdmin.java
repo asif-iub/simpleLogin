@@ -1,5 +1,7 @@
 package com.cse.oop.myprojects.simplelogin;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,14 +39,27 @@ public class DashboardAdmin {
 
     private User user;
 
+    private ObservableList<User> userList;
+    private ObservableList<User> filteredList;
+
     @FXML
     void initialize() {
         username_tc.setCellValueFactory(new PropertyValueFactory<>("username"));
         password_tc.setCellValueFactory(new PropertyValueFactory<>("password"));
 
-        user_tableView.getItems().addAll(Authenticator.getUserList());
+//        user_tableView.getItems().addAll(Authenticator.getUserList());
+        user_tableView.setItems(userList);
     }
 
+    void filter(ActionEvent event) {
+        // loop through userList and copy selected items to filtered List
+
+        user_tableView.setItems(filteredList);
+    }
+
+    void resetFilter(ActionEvent event) {
+        user_tableView.setItems(userList);
+    }
 
     @FXML
     void onLogOutButtonClick(ActionEvent event) throws IOException {
@@ -67,6 +82,12 @@ public class DashboardAdmin {
         String username = username_tf.getText();
         String password = password_tf.getText();
 
+        try {
+            int number = Integer.parseInt(password);
+        } catch (NumberFormatException e) {
+            message_lbl.setText("Please enter a valid number!");
+        }
+
         if (!validate(username, password)) {
             message_lbl.setText("Username or password cannot be blank!");
             return;
@@ -78,14 +99,15 @@ public class DashboardAdmin {
         }
 
         User login_user = new User(username, password);
-        if (auth.addNewUser(login_user)) {
+        try {
+            auth.addNewUser(login_user);
             message_lbl.setText("User added successfully!");
             user_tableView.getItems().add(login_user);
-        }
-        else {
-            message_lbl.setText("Could not add user!");
+        } catch (Exception e) {
+            message_lbl.setText("Username is not available!");
         }
     }
+
 
     private boolean validatePassword(String password) {
         if (password.length() < 6) return false;
@@ -95,7 +117,7 @@ public class DashboardAdmin {
         boolean hasuppercase = false;
         boolean hasspecialchar = false;
 
-        for (int i = 0; i < password.length(); i++){
+        for (int i = 0; i < password.length(); i++) {
             char c = password.charAt(i);
             if (Character.isDigit(c)) hasdigit = true;
             else if (Character.isLowerCase(c)) haslowercase = true;
@@ -116,7 +138,7 @@ public class DashboardAdmin {
 
 
     public void setUser(User user) {
-        this.user  = user;
+        this.user = user;
         user_lbl.setText(user.getUsername());
     }
 
