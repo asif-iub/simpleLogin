@@ -23,6 +23,9 @@ public class DashboardAdmin {
     private Label message_lbl;
 
     @FXML
+    private Label message_lbl2;
+
+    @FXML
     private PasswordField password_tf;
 
     @FXML
@@ -33,6 +36,9 @@ public class DashboardAdmin {
 
     @FXML
     private TextField age_tf;
+
+    @FXML
+    private TextField filter_age_tf;
 
     @FXML
     private TableView<User> user_tableView;
@@ -65,14 +71,29 @@ public class DashboardAdmin {
 //        user_tableView.setItems(userList);
     }
 
-    void filter(ActionEvent event) {
+    @FXML
+    void onFilterButtonClick(ActionEvent event) {
         // loop through userList and copy selected items to filtered List
+        try {
+            int min_age = Integer.parseInt(filter_age_tf.getText());
 
-        user_tableView.setItems(filteredList);
+            filteredList = FXCollections.observableArrayList();
+            for (User user : user_tableView.getItems()) {
+                if (user.getAge() >= min_age)
+                    filteredList.add(user);
+            }
+
+            user_tableView.setItems(filteredList);
+        }
+        catch (NumberFormatException e) {
+            message_lbl2.setText("Minimum age must be a valid number.");
+        }
     }
 
-    void resetFilter(ActionEvent event) {
-        user_tableView.setItems(userList);
+    @FXML
+    void onResetButtonClick(ActionEvent event) {
+        user_tableView.getItems().clear();
+        user_tableView.getItems().addAll(Authenticator.getUserList());
     }
 
     @FXML

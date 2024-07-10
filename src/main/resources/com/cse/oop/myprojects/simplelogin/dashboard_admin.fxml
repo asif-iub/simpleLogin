@@ -73,7 +73,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="user_tableView" layoutX="223.0" layoutY="122.0" prefHeight="241.0" prefWidth="357.0">
+      <TableView fx:id="user_tableView" layoutX="223.0" layoutY="122.0" prefHeight="231.0" prefWidth="357.0">
         <columns>
           <TableColumn fx:id="username_tc" text="Username" />
           <TableColumn fx:id="password_tc" prefWidth="79.0" text="Password" />
@@ -84,5 +84,25 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <TextField fx:id="filter_age_tf" layoutX="326.0" layoutY="80.0" promptText="Minimum age">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Button layoutX="507.0" layoutY="80.0" mnemonicParsing="false" onAction="#onFilterButtonClick" prefHeight="30.0" prefWidth="68.0" text="Filter">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label fx:id="message_lbl2" layoutX="223.0" layoutY="366.0" prefHeight="24.0" prefWidth="269.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="508.0" layoutY="363.0" mnemonicParsing="false" onAction="#onResetButtonClick" prefHeight="30.0" prefWidth="68.0" text="Reset">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
