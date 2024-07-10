@@ -29,6 +29,12 @@ public class DashboardAdmin {
     private TextField username_tf;
 
     @FXML
+    private TextField fullname_tf;
+
+    @FXML
+    private TextField age_tf;
+
+    @FXML
     private TableView<User> user_tableView;
 
     @FXML
@@ -36,6 +42,12 @@ public class DashboardAdmin {
 
     @FXML
     private TableColumn<User, String> username_tc;
+
+    @FXML
+    private TableColumn<User, String> fullname_tc;
+
+    @FXML
+    private TableColumn<User, Integer> age_tc;
 
     private User user;
 
@@ -46,9 +58,11 @@ public class DashboardAdmin {
     void initialize() {
         username_tc.setCellValueFactory(new PropertyValueFactory<>("username"));
         password_tc.setCellValueFactory(new PropertyValueFactory<>("password"));
+        fullname_tc.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        age_tc.setCellValueFactory(new PropertyValueFactory<>("age"));
 
-//        user_tableView.getItems().addAll(Authenticator.getUserList());
-        user_tableView.setItems(userList);
+        user_tableView.getItems().addAll(Authenticator.getUserList());
+//        user_tableView.setItems(userList);
     }
 
     void filter(ActionEvent event) {
@@ -81,12 +95,7 @@ public class DashboardAdmin {
 
         String username = username_tf.getText();
         String password = password_tf.getText();
-
-        try {
-            int number = Integer.parseInt(password);
-        } catch (NumberFormatException e) {
-            message_lbl.setText("Please enter a valid number!");
-        }
+        String fullName = fullname_tf.getText();
 
         if (!validate(username, password)) {
             message_lbl.setText("Username or password cannot be blank!");
@@ -98,7 +107,18 @@ public class DashboardAdmin {
             return;
         }
 
-        User login_user = new User(username, password);
+        int age = -1;
+        try {
+            age = Integer.parseInt(age_tf.getText());
+        } catch (NumberFormatException e) {
+            message_lbl.setText("Age must be a valid number!");
+        }
+        if (age < 18) {
+            message_lbl.setText("Age must be at least 18.");
+            return;
+        }
+
+        User login_user = new User(username, password, fullName, age);
         try {
             auth.addNewUser(login_user);
             message_lbl.setText("User added successfully!");

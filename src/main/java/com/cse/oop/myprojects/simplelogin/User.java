@@ -5,11 +5,34 @@ import java.util.Objects;
 public class User {
     private final String username;
     private String password;
+    private String fullName;
+    private int age;
 
-    public User(String username, String password) {
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public User(String username, String password, String fullName, int age) {
         this.username = username;
         this.password = password;
-        System.out.println("User '" + username + "' has been created!");
+        this.fullName = fullName;
+        this.age = age;
+    }
+
+    public User(String username, String password) {
+        this(username, password, "Unknown", 20);
     }
 
     public String getUsername() {
